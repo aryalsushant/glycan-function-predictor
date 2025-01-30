@@ -1,8 +1,19 @@
 import openai
-import config
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Retrieve API key
+api_key = os.getenv("OPENAI_API_KEY")
+
+# Ensure API key is loaded
+if not api_key:
+    raise ValueError("API Key not found. Make sure you have a .env file with OPENAI_API_KEY set.")
 
 # Set OpenAI API Key
-openai.api_key = config.OPENAI_API_KEY
+openai.api_key = api_key
 
 def predict_glycan_function(glycan_sequence):
     """
